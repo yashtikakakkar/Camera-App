@@ -11,6 +11,11 @@ let currZoom = 1; // min = 1 && max = 3
 
 let zoomIn = document.querySelector(".in");
 let zoomOut = document.querySelector(".out");
+let galleryBtn = document.querySelector("#gallery");
+
+galleryBtn.addEventListener("click", function () {
+  location.assign("gallery.html");
+});
 
 zoomIn.addEventListener("click", function () {
   currZoom = currZoom + 0.1;
@@ -99,13 +104,15 @@ promiseToUseCamera
       let blob = new Blob(chunks, { type: "video/mp4" });
       chunks = [];
 
-      let link = URL.createObjectURL(blob);
+      // let link = URL.createObjectURL(blob);
 
-      let a = document.createElement("a");
-      a.href = link;
-      a.download = "video.mp4";
-      a.click();
-      a.remove();
+      // let a = document.createElement("a");
+      // a.href = link;
+      // a.download = "video.mp4";
+      // a.click();
+      // a.remove();
+
+      saveMedia(blob);
     });
   })
   .catch(function () {
@@ -128,11 +135,11 @@ captureBtn.addEventListener("click", function (e) {
   let tool = canvas.getContext("2d");
 
   //top left to center
-  tool.translate(canvas.width/2, canvas.height/2);
+  tool.translate(canvas.width / 2, canvas.height / 2);
   //zoom
   tool.scale(currZoom, currZoom);
   //center to top left because that's where we start drawing, origin
-  tool.translate(-canvas.width/2, -canvas.height/2);
+  tool.translate(-canvas.width / 2, -canvas.height / 2);
 
   tool.drawImage(videoPlayer, 0, 0);
 
@@ -146,9 +153,11 @@ captureBtn.addEventListener("click", function (e) {
   let link = canvas.toDataURL();
   canvas.remove();
 
-  let a = document.createElement("a");
-  a.href = link;
-  a.download = "image.png";
-  a.click();
-  a.remove();
+  // let a = document.createElement("a");
+  // a.href = link;
+  // a.download = "image.png";
+  // a.click();
+  // a.remove();
+
+  saveMedia(link);
 });

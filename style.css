@@ -90,6 +90,13 @@ button span {
   color: white;
   font-size: 3rem;
   text-align: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.zoom div:hover {
+  background: #727171;
 }
 
 .capture-animation {
@@ -115,6 +122,13 @@ button span {
   position: fixed;
   top: 0;
   z-index: 1;
+}
+
+#gallery {
+  top: 8rem;
+  color: white;
+  font-size: 1.1rem;
+  left: 2rem;
 }
 
 @keyframes shrinkDownUp {
