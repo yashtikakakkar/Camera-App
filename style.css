@@ -27,6 +27,7 @@ button {
   border: none;
   background: black;
   border: 8px solid white;
+  z-index: 3;
 }
 
 button span {
@@ -61,6 +62,7 @@ button span {
   left: 2rem;
   display: flex;
   flex-direction: column;
+  z-index: 3;
 }
 
 .filter {
@@ -79,6 +81,7 @@ button span {
   right: 2.5rem;
   display: flex;
   flex-direction: column;
+  z-index: 3;
 }
 
 .zoom div {
@@ -101,10 +104,18 @@ button span {
 }
 
 .stop-record-animation {
-    animation: recordStop;
-    animation-duration: 0.7s;
-    animation-fill-mode: forwards;
-  }
+  animation: recordStop;
+  animation-duration: 0.7s;
+  animation-fill-mode: forwards;
+}
+
+.filter-div {
+  height: 100vh;
+  width: 100vw;
+  position: fixed;
+  top: 0;
+  z-index: 1;
+}
 
 @keyframes shrinkDownUp {
   0% {

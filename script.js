@@ -6,9 +6,53 @@ let body = document.querySelector("body");
 let mediaRecorder;
 let chunks = [];
 let isRecording = false;
+let filter = "";
+let currZoom = 1; // min = 1 && max = 3
+
+let zoomIn = document.querySelector(".in");
+let zoomOut = document.querySelector(".out");
+
+zoomIn.addEventListener("click", function () {
+  currZoom = currZoom + 0.1;
+  if (currZoom > 3) currZoom = 3;
+
+  console.log(currZoom);
+  videoPlayer.style.transform = `scale(${currZoom})`;
+});
+
+zoomOut.addEventListener("click", function () {
+  currZoom = currZoom - 0.1;
+  if (currZoom < 1) currZoom = 1;
+
+  console.log(currZoom);
+  videoPlayer.style.transform = `scale(${currZoom})`;
+});
+
+let allFilters = document.querySelectorAll(".filter");
+
+for (let i = 0; i < allFilters.length; i++) {
+  allFilters[i].addEventListener("click", function (e) {
+    let previousFilter = document.querySelector(".filter-div");
+
+    if (previousFilter) previousFilter.remove();
+
+    let color = e.currentTarget.style.backgroundColor;
+    filter = color;
+    let div = document.createElement("div");
+    div.classList.add("filter-div");
+    div.style.backgroundColor = color;
+    body.append(div);
+  });
+}
 
 recordBtn.addEventListener("click", function () {
   let innerSpan = recordBtn.querySelector("span");
+
+  let previousFilter = document.querySelector(".filter-div");
+
+  if (previousFilter) previousFilter.remove();
+
+  filter = "";
 
   if (isRecording) {
     mediaRecorder.stop();
@@ -17,6 +61,8 @@ recordBtn.addEventListener("click", function () {
     innerSpan.classList.remove("start-record-animation");
   } else {
     mediaRecorder.start();
+    currZoom = 1;
+    videoPlayer.style.transform = `scale(${currZoom})`;
     isRecording = true;
     innerSpan.classList.add("start-record-animation");
     innerSpan.classList.remove("stop-record-animation");
@@ -80,11 +126,25 @@ captureBtn.addEventListener("click", function (e) {
   canvas.width = videoPlayer.videoWidth;
 
   let tool = canvas.getContext("2d");
+
+  //top left to center
+  tool.translate(canvas.width/2, canvas.height/2);
+  //zoom
+  tool.scale(currZoom, currZoom);
+  //center to top left because that's where we start drawing, origin
+  tool.translate(-canvas.width/2, -canvas.height/2);
+
   tool.drawImage(videoPlayer, 0, 0);
 
   //   body.append(canvas);
 
+  if (filter != "") {
+    tool.fillStyle = filter;
+    tool.fillRect(0, 0, canvas.width, canvas.height);
+  }
+
   let link = canvas.toDataURL();
+  canvas.remove();
 
   let a = document.createElement("a");
   a.href = link;
