@@ -1,6 +1,6 @@
 ## Camera App
 
-This is a camera web app which allows the user to capture pictures and videos, and store them on their device. The storage has been implemented here using IndexedDB.
+This is a camera web app that allows the user to capture pictures and videos, and store them on their device. The storage has been implemented here using IndexedDB.
 
 Some functionalities of the application are: <br>
 📸 capturing pictures and videos <br>
