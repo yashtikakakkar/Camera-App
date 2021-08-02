@@ -103,7 +103,7 @@ function viewMedia() {
       cursor.continue();
     } else {
       if (numberOfMedia == 0) {
-        galleryContainer.innerHTML = `<h1>Your Gallery has no media yet</h1>`;
+        galleryContainer.innerHTML = `<h3 style="color: white;">Oops! Your gallery is empty.</h3>`;
       }
     }
   });
