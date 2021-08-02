@@ -7,7 +7,7 @@ let mediaRecorder;
 let chunks = [];
 let isRecording = false;
 let filter = "";
-let currZoom = 1; // min = 1 && max = 3
+let currZoom = 1; 
 
 let zoomIn = document.querySelector(".in");
 let zoomOut = document.querySelector(".out");
@@ -74,23 +74,14 @@ recordBtn.addEventListener("click", function () {
   }
 });
 
-// navigator, mediaDevices, getUSerMedia are all Browser's inbuilt functions/objects
-// BOM -> Browser Object Module
-
-// getUserMedia will ask for permission from the user to access video & audio
 let promiseToUseCamera = navigator.mediaDevices.getUserMedia({
   video: true,
   audio: true,
 });
-//if separate permissions for audio and video, make separate promises
 
 promiseToUseCamera
   .then(function (mediaStream) {
-    // when promise resolves
-    // console.log("permission to access has been given by the user");
-
-    // srcObject should contain the path/content of the video
-    // mediaStream is an object that has the actual video and audio that is being captured
+    
     videoPlayer.srcObject = mediaStream;
 
     mediaRecorder = new MediaRecorder(mediaStream);
@@ -104,19 +95,10 @@ promiseToUseCamera
       let blob = new Blob(chunks, { type: "video/mp4" });
       chunks = [];
 
-      // let link = URL.createObjectURL(blob);
-
-      // let a = document.createElement("a");
-      // a.href = link;
-      // a.download = "video.mp4";
-      // a.click();
-      // a.remove();
-
       saveMedia(blob);
     });
   })
   .catch(function () {
-    // when promise rejects
     console.log("permission to access has been denied by the user");
   });
 
@@ -134,16 +116,11 @@ captureBtn.addEventListener("click", function (e) {
 
   let tool = canvas.getContext("2d");
 
-  //top left to center
   tool.translate(canvas.width / 2, canvas.height / 2);
-  //zoom
   tool.scale(currZoom, currZoom);
-  //center to top left because that's where we start drawing, origin
   tool.translate(-canvas.width / 2, -canvas.height / 2);
 
   tool.drawImage(videoPlayer, 0, 0);
-
-  //   body.append(canvas);
 
   if (filter != "") {
     tool.fillStyle = filter;
@@ -152,12 +129,6 @@ captureBtn.addEventListener("click", function (e) {
 
   let link = canvas.toDataURL();
   canvas.remove();
-
-  // let a = document.createElement("a");
-  // a.href = link;
-  // a.download = "image.png";
-  // a.click();
-  // a.remove();
 
   saveMedia(link);
 });
