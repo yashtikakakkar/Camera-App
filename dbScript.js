@@ -47,8 +47,8 @@ function viewMedia() {
 
       mediaCard.innerHTML = `<div class="actual-media"></div>
       <div class="media-buttons">
-          <button class="media-download">Download</button>
-          <button data-mid = "${cursor.value.mId}" class="media-delete">Delete</button>
+          <button class="media-download">DOWNLOAD</button>
+          <button data-mid = "${cursor.value.mId}" class="media-delete">DELETE</button>
       </div>`;
 
       let data = cursor.value.mediaData;

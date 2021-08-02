@@ -25,7 +25,7 @@ button {
   width: 5rem;
   border-radius: 50%;
   border: none;
-  background: black;
+  background: rgba(0, 0, 0, 0.445);
   border: 8px solid white;
   z-index: 3;
 }
@@ -82,21 +82,29 @@ button span {
   display: flex;
   flex-direction: column;
   z-index: 3;
+  justify-content: space-between;
 }
 
 .zoom div {
-  background: #2b2a2a;
-  flex-grow: 1;
+  background: #575656d0;
+  /* flex-grow: 1; */
+  height: 47.5%;
+  width: 95%;
   color: white;
   font-size: 3rem;
   text-align: center;
   display: flex;
   justify-content: center;
   align-items: center;
+  border-radius: 50%;
+}
+
+.zoom div span {
+  font-size: 2rem;
 }
 
 .zoom div:hover {
-  background: #727171;
+  background: #2b2828;
 }
 
 .capture-animation {
@@ -127,8 +135,15 @@ button span {
 #gallery {
   top: 8rem;
   color: white;
-  font-size: 1.1rem;
   left: 2rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+}
+
+#gallery span {
+  font-size: 2rem;
 }
 
 @keyframes shrinkDownUp {
